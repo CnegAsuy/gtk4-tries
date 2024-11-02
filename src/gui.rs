@@ -1,4 +1,4 @@
-use gtk::{prelude::*, Align::*, Application, ApplicationWindow, Button, Label};
+use gtk::{prelude::*, Align::*, Application, ApplicationWindow, Button, Entry, Label};
 use std::cell::Cell;
 use std::rc::Rc;
 
@@ -17,6 +17,7 @@ pub fn build_ui(application: &Application) {
         .label("Up!")
         .valign(Center)
         .halign(Center)
+        .width_request(200)
         .build();
 
     // Create a button to decrease the number.
@@ -24,9 +25,18 @@ pub fn build_ui(application: &Application) {
         .label("Down!")
         .valign(Center)
         .halign(Center)
+        .width_request(200)
         .build();
 
-    // Shared number that both buttons will modify.
+    // Create an Entry widget for user input.
+    let text_box = Entry::builder()
+        .placeholder_text("Enter the number")
+        .valign(Center)
+        .halign(Center)
+        .width_request(200)
+        .build();
+
+    // Shared number that all buttons will modify.
     let number = Rc::new(Cell::new(0));
 
     // Connect the "Increase" button to increment the number and update the label.
@@ -45,20 +55,35 @@ pub fn build_ui(application: &Application) {
         dec_label.set_text(&format!("{}", dec_number.get()));
     });
 
+    let chng_number = Rc::clone(&number);
+    let chng_label = label.clone();
+    let text_box_clone = text_box.clone();
+    text_box.connect_activate(move |_| {
+        // Try to parse the Entry text as an integer.
+        if let Ok(value) = text_box_clone.text().parse::<i32>() {
+            chng_number.set(value);
+            chng_label.set_text(&format!("{}", chng_number.get()));
+        } else {
+            // Optionally handle the error case, e.g., clear the label or show an error.
+            chng_label.set_text("Invalid number");
+        }});
+
     // Create the main application window.
     let window = ApplicationWindow::builder()
         .application(application)
         .title("Counter App")
         .build();
 
-    // Create a vertical layout container and add the label and buttons.
+    // Create a vertical layout container and add the widgets.
     let vbox = gtk::Box::new(gtk::Orientation::Vertical, 5);
     vbox.set_valign(Center);
     vbox.set_halign(Center);
-    
-    vbox.append(&button_increase);
+
+    // Append widgets to the vbox.
     vbox.append(&label);
+    vbox.append(&button_increase);
     vbox.append(&button_decrease);
+    vbox.append(&text_box);
 
     window.set_child(Some(&vbox));
     window.present();
