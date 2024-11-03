@@ -1,7 +1,7 @@
 use gtk::{prelude::*, Align::*, Application, ApplicationWindow, Button, Entry, Label};
 use std::cell::Cell;
 use std::rc::Rc;
-
+#[allow(unused)]
 pub fn build_ui(application: &Application) {
     // Create a label to display the number.
     let label = Label::builder()
