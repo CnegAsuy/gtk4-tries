@@ -1,6 +1,6 @@
-use gtk::{prelude::*, Align::*, Application, ApplicationWindow, Button, Entry, Label};
+use gtk::{prelude::*, Align::*, Button, Entry, Label};
 
-pub fn build_ui(application: &Application) {
+pub fn build_ui() -> gtk::Box {
     // defining the GObjects for use
     let label = Label::builder()
         .label("Result will be here!")
@@ -120,12 +120,6 @@ pub fn build_ui(application: &Application) {
         }
     });
 
-    // Design the window layout
-    let window = ApplicationWindow::builder()
-        .application(application)
-        .title("Calculator!")
-        .build();
-
     let vbox = gtk::Box::new(gtk::Orientation::Vertical, 5);
     let vbox2 = gtk::Box::new(gtk::Orientation::Horizontal, 5);
     let vbox3 = gtk::Box::new(gtk::Orientation::Horizontal, 5);
@@ -146,6 +140,5 @@ pub fn build_ui(application: &Application) {
     vbox.append(&vbox2);
     vbox.append(&vbox3);
 
-    window.set_child(Some(&vbox));
-    window.present();
+    vbox
 }
