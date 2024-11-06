@@ -14,4 +14,3 @@ fn main() -> glib::ExitCode {
     app.connect_activate(gui::build_ui);
     app.run()
 }
-

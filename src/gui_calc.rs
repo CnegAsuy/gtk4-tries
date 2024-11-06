@@ -1,7 +1,7 @@
 use gtk::{prelude::*, Align::*, Button, Entry, Label};
 
 pub fn build_ui() -> gtk::Box {
-    // defining the GObjects for use
+    // Defining the GObjects for use.
     let label = Label::builder()
         .label("Result will be here!")
         .margin_top(20)
@@ -51,7 +51,7 @@ pub fn build_ui() -> gtk::Box {
         .build();
 
 
-    // add 2 number each other and write it on label
+    // Add 2 number each other and write it on label.
     let box_1_cln = first_number_box.clone();
     let box_2_cln = second_number_box.clone();
     let label_cln = label.clone();
@@ -67,7 +67,7 @@ pub fn build_ui() -> gtk::Box {
         }
     });
 
-    // divisor
+    // Divisor.
     let box_1_cln = first_number_box.clone();
     let box_2_cln = second_number_box.clone();
     let label_cln = label.clone();
@@ -87,7 +87,7 @@ pub fn build_ui() -> gtk::Box {
         }
     });
 
-    // value multiplicater 
+    // Value multiplicater.
     let box_1_cln = first_number_box.clone();
     let box_2_cln = second_number_box.clone();
     let label_cln = label.clone();
@@ -104,7 +104,7 @@ pub fn build_ui() -> gtk::Box {
     });
 
 
-    // substract the number.
+    // Substract the number.
     let box_1_cln = first_number_box.clone();
     let box_2_cln = second_number_box.clone();
     let label_cln = label.clone();
