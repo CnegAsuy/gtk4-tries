@@ -1,4 +1,4 @@
-# A Calc and Counter Written With Rust.
+# A Calc and Counter Written in Rust.
 
 Actually i just tried to write something and i said "Why am i don't use any library i can use GTK Lib and i tried" then i make this 2 adjacent application using `gtk::Stack` and there is the application.
 
